@@ -1,5 +1,7 @@
 <?php
 
+use Interview\Challenge3\App\StateFactory;
+use Interview\Challenge3\Vendor\StateRequestFactoryInterface;
 use Interview\Misc\IoC;
 
 /*
@@ -14,7 +16,7 @@ use Interview\Misc\IoC;
  * a list of available states. Otherwise, you have to throw \DomainException.
  */
 
-//IoC::set(
-// interface,
-// implementation
-//);
+IoC::set(
+    StateRequestFactoryInterface::class,
+    StateFactory::class
+);

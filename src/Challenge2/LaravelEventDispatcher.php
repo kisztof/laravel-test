@@ -5,15 +5,29 @@ namespace Interview\Challenge2;
 /*
  * Implement interface methods and proxy them to Laravel event dispatcher
  */
+
+use Closure;
+use Illuminate\Events\Dispatcher;
+
 class LaravelEventDispatcher implements EventDispatcherInterface
 {
-    public function dispatch(object $event)
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    private Dispatcher $eventDispatcher;
+
+    public function __construct(Dispatcher $eventDispatcher)
     {
-        // TODO: Implement dispatch() method.
+        $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function addListener(string $event, \Closure $listener)
+    public function dispatch(object $event)
     {
-        // TODO: Implement addListener() method.
+        $this->eventDispatcher->dispatch($event);
+    }
+
+    public function addListener(string $event, Closure $listener)
+    {
+        $this->eventDispatcher->listen([$event], $listener);
     }
 }
